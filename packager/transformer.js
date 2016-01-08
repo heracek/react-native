@@ -35,6 +35,9 @@ if (!fs.existsSync(projectBabelRCPath)) {
  * config object with the appropriate plugins.
  */
 function buildBabelConfig(filename, options) {
+  var getBabelRelayPlugin = require('../../babel-relay-plugin');
+  var schema = require('../../../schema.json');
+
   const extraConfig = {
     filename,
     sourceFileName: filename,
@@ -48,7 +51,7 @@ function buildBabelConfig(filename, options) {
   if (options.inlineRequires) {
     extraPlugins.push(inlineRequires);
   }
-  config.plugins = extraPlugins.concat(config.plugins);
+  config.plugins = extraPlugins.concat([getBabelRelayPlugin(schema.data)].concat(config.plugins));
 
   return Object.assign({}, babelRC, extraConfig);
 }
