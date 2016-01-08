@@ -25,6 +25,9 @@ const babelRC =
 function transform(src, filename, options) {
   options = options || {};
 
+  var getBabelRelayPlugin = require('../../babel-relay-plugin');
+  var schema = require('../../../schema.json');
+
   const extraPlugins = ['external-helpers-2'];
   const extraConfig = {
     filename,
@@ -36,7 +39,7 @@ function transform(src, filename, options) {
   if (options.inlineRequires) {
     extraPlugins.push(inlineRequires);
   }
-  config.plugins = extraPlugins.concat(config.plugins);
+  config.plugins = extraPlugins.concat([getBabelRelayPlugin(schema.data)].concat(config.plugins));
 
   // Manually resolve all default Babel plugins. babel.transform will attempt to resolve
   // all base plugins relative to the file it's compiling. This makes sure that we're
