@@ -150,5 +150,15 @@ var styles = StyleSheet.create({
 var RCTDatePickerIOS = requireNativeComponent('RCTDatePicker', DatePickerIOS, {
   nativeOnly: { onChange: true },
 });
+RCTDatePickerIOS.propTypes = {
+  ...View.propTypes,
+  date: PropTypes.number,
+  onChange: PropTypes.func.isRequired,
+  maximumDate: PropTypes.number,
+  minimumDate: PropTypes.number,
+  mode: PropTypes.oneOf(['date', 'time', 'datetime']),
+  minuteInterval: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30]),
+  timeZoneOffsetInMinutes: PropTypes.number,
+};
 
 module.exports = DatePickerIOS;
