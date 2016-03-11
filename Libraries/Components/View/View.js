@@ -309,6 +309,8 @@ var View = React.createClass({
      * @platform android
      */
     needsOffscreenAlphaCompositing: PropTypes.bool,
+
+    overlayColor: PropTypes.number,
   },
 
   render: function() {
