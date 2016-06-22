@@ -123,7 +123,7 @@ RCT_CUSTOM_CONVERTER(NSData *, NSData, [json dataUsingEncoding:NSUTF8StringEncod
     return URL ? [NSURLRequest requestWithURL:URL] : nil;
   }
   if ([json isKindOfClass:[NSDictionary class]]) {
-    NSURL *URL = [self NSURL:json[@"uri"] ?: json[@"url"]];
+    NSURL *URL = [self NSURL:RCTNilIfNull(json[@"uri"]) ?: json[@"url"]];
     if (!URL) {
       return nil;
     }
